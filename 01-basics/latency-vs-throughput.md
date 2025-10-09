@@ -171,6 +171,196 @@ Each arrow introduces potential latency.
 
 ---
 
+# Throughput in System Design
+
+---
+
+## 1. What Is Throughput?
+
+**Throughput** is the measure of **how many requests or operations a system can process per unit time**.
+It represents the **capacity** or **efficiency** of the system.
+
+### Formula
+
+```
+Throughput = Total number of requests processed / Total time taken
+```
+
+### Example
+
+If a server handles 10,000 requests in 100 seconds, then:
+
+```
+Throughput = 10,000 / 100 = 100 requests per second
+```
+
+High throughput means the system can handle **many users or operations efficiently**.
+
+---
+
+## 2. Throughput vs Latency
+
+| Metric         | Definition                              | Analogy                                             |
+| -------------- | --------------------------------------- | --------------------------------------------------- |
+| **Latency**    | Time taken to process a single request  | How long one car takes to pass through a toll gate  |
+| **Throughput** | Number of requests processed per second | How many cars pass through the toll gate per minute |
+
+A system can have **low latency but low throughput** (fast per request but limited parallelism),
+or **high throughput but high latency** (many requests handled but each takes longer).
+
+---
+
+## 3. Throughput in Monolithic Architecture
+
+### 3.1. Characteristics
+
+* A **monolithic system** handles all business logic within a single codebase and process.
+* All modules share resources such as CPU, memory, and the database.
+
+### 3.2. Throughput Behavior
+
+* **High throughput** for small to medium-scale systems since everything runs locally.
+* **Limited scalability** because:
+
+  * The whole application scales as one unit.
+  * If one part (e.g., authentication) becomes slow, it affects the entire system.
+  * Resource contention (CPU, memory) increases as load grows.
+
+### 3.3. Example
+
+```
+Frontend → Monolithic Server → Shared Database
+```
+
+All requests go through one large process; as traffic increases, throughput eventually saturates.
+
+---
+
+## 4. Throughput in Distributed Architecture
+
+### 4.1. Characteristics
+
+* The system is divided into **independent services** (microservices).
+* Each service can scale independently and communicate via APIs or message queues.
+
+### 4.2. Throughput Behavior
+
+* **Potentially higher throughput** due to:
+
+  * Parallel processing across multiple services.
+  * Independent scaling of bottleneck services.
+  * Load balancing and distributed databases.
+
+* However, throughput can decrease if:
+
+  * Network latency or inter-service overhead increases.
+  * Poorly designed service communication (chained dependencies).
+
+### 4.3. Example
+
+```
+Frontend → API Gateway → Service A → Service B → Database
+```
+
+Each service can scale horizontally, improving overall system throughput.
+
+---
+
+## 5. Causes of Low Throughput
+
+| Category               | Common Causes                                       |
+| ---------------------- | --------------------------------------------------- |
+| **CPU / Memory**       | Overloaded server, inefficient code, memory leaks   |
+| **Database**           | Unoptimized queries, locks, limited connection pool |
+| **Network**            | High latency, low bandwidth, packet loss            |
+| **Architecture**       | Sequential request handling, lack of parallelism    |
+| **Application Design** | Blocking I/O, thread contention, poor caching       |
+| **Infrastructure**     | Insufficient instances, lack of load balancing      |
+
+Low throughput means the system can’t handle increasing traffic efficiently, even if latency per request is acceptable.
+
+---
+
+## 6. Techniques to Improve Throughput
+
+### 6.1. Architectural Improvements
+
+* **Horizontal Scaling**
+  Add more instances of a service or server to distribute load.
+* **Load Balancing**
+  Use a load balancer (e.g., Nginx, HAProxy) to spread traffic evenly.
+* **Microservices Architecture**
+  Split large monolith into smaller, independently scalable services.
+
+---
+
+### 6.2. Application-Level Improvements
+
+* **Use Caching**
+  Cache frequently accessed data (Redis, Memcached) to reduce repeated database access.
+* **Asynchronous Processing**
+  Offload long-running tasks to background jobs or queues.
+* **Batch Processing**
+  Process multiple requests together instead of one at a time.
+* **Connection Pooling**
+  Reuse open database or network connections instead of opening new ones for each request.
+
+---
+
+### 6.3. Database-Level Improvements
+
+* **Indexing**
+  Create indexes on frequently queried columns.
+* **Query Optimization**
+  Avoid full table scans and unnecessary joins.
+* **Database Sharding or Replication**
+  Distribute data across multiple nodes to increase throughput.
+* **Use Read Replicas**
+  Offload read queries from the main database.
+
+---
+
+### 6.4. Network and Infrastructure Optimizations
+
+* **Use Content Delivery Networks (CDNs)**
+  Serve static files from edge servers to reduce backend load.
+* **Use Efficient Protocols**
+  Use HTTP/2 or gRPC for faster communication.
+* **Increase Bandwidth or Reduce Hops**
+  Deploy services closer to users or within the same region.
+
+---
+
+### 6.5. Code-Level Optimizations
+
+* Reduce unnecessary computations.
+* Use efficient data structures.
+* Avoid blocking I/O (use asynchronous frameworks like Node.js, asyncio, etc.).
+* Profile and remove bottlenecks using performance monitoring tools.
+
+---
+
+## 7. Summary Table
+
+| Aspect                  | Monolithic                 | Distributed                                |
+| ----------------------- | -------------------------- | ------------------------------------------ |
+| **Scalability**         | Limited (vertical scaling) | High (horizontal scaling)                  |
+| **Throughput**          | High for small scale       | High for large scale                       |
+| **Dependencies**        | Shared, internal           | Network-based                              |
+| **Bottleneck**          | Single process or database | Network and inter-service calls            |
+| **Improvement Methods** | Optimize code and DB       | Scale services and reduce network overhead |
+
+---
+
+## 8. Key Takeaway
+
+* **Throughput** measures how many operations a system can perform per second.
+* **Monoliths** are simpler but limited in scalability and throughput growth.
+* **Distributed systems** can achieve higher throughput but require careful design to manage inter-service communication.
+* Throughput improves through **scaling, caching, batching, async design, and efficient resource utilization**.
+
+---
+
 # Difference Between CDN and Caching
 
 ---
