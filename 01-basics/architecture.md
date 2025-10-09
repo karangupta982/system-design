@@ -53,3 +53,70 @@ Example:
 | **Technology Stack** | HTML, CSS, JS | Full Stack (MERN, MEAN, etc.) |
 | **Authentication** | Usually none | Common (Login/Register) |
 | **Examples** | Wikipedia, Blog | Gmail, Netflix, Twitter |
+
+---
+
+
+# System Architecture vs Internal Design
+
+## Overview
+In system design, **architecture** and **internal design** represent two different levels of detail.
+
+- **Architecture** defines the **high-level structure** of a system — how components are organized and interact.
+- **Internal design** (or detailed design) defines **how each component works internally**.
+
+---
+
+## Architecture
+**Architecture** is the blueprint of a system.
+
+- Describes major components (frontend, backend, database, cache, message queue, etc.)
+- Defines data flow and communication between components
+- Focuses on scalability, reliability, and performance
+
+**Example:**
+Client → API Gateway → Service Layer → Database
+↘ Cache ↙
+
+---
+
+## Internal Design
+**Internal design** focuses on implementation details inside each component.
+
+- Data structures, algorithms, and logic
+- API endpoints, database schemas, and internal workflows
+- Component-level optimizations
+
+**Example:**
+Inside the “Video Service”:
+- How upload API handles chunks  
+- How metadata is stored  
+- How encoding jobs are queued  
+
+---
+
+## Analogy
+
+| Concept | Description | Analogy |
+|----------|--------------|----------|
+| **Architecture** | High-level structure and interaction of system components | City map showing how buildings and roads are connected |
+| **Internal Design** | Detailed design of individual components | Blueprint of a single building showing rooms, wiring, and plumbing |
+
+---
+
+## Key Difference
+
+| Aspect | Architecture | Internal Design |
+|--------|---------------|----------------|
+| **Level** | High-level | Low-level |
+| **Focus** | Structure & communication | Implementation details |
+| **Purpose** | Define the system’s blueprint | Build each component correctly |
+| **Audience** | Architects, tech leads | Developers, engineers |
+
+---
+
+## Summary
+- **Architecture** = Big picture — how the system is organized  
+- **Internal design** = Implementation — how each part works  
+- Both are essential: architecture provides direction; internal design provides execution.
+
