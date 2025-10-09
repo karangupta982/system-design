@@ -285,3 +285,98 @@ Each service can be **developed, deployed, and scaled independently**.
 In real-world evolution:
 > Start with **Monolithic** → grow into **Distributed** as traffic, team size, and complexity increase.
 
+---
+
+# Handling Failures in Distributed Architecture
+
+In a distributed architecture, an application is divided into multiple independent microservices, such as authentication, payment, user, or notification services. Each runs separately, often on different servers or containers. Because these services depend on one another, a failure in one can affect the whole system’s performance or availability.
+
+To maintain reliability and uptime, distributed systems implement several fault-tolerance mechanisms. One of the most important among them is **replication**.
+
+---
+
+## 1. Replication
+
+**Replication** means running multiple instances (replicas) of the same microservice simultaneously.
+
+### Purpose of Replication
+
+* Ensures availability even if one instance fails.
+* Helps distribute high traffic across multiple instances.
+* Increases fault tolerance and improves reliability.
+
+### How Replication Works
+
+Each microservice may have several instances:
+
+```
+user-service-1
+user-service-2
+user-service-3
+```
+
+A load balancer distributes incoming requests evenly among these replicas. If one instance fails, it stops receiving traffic until it recovers, and the rest continue handling requests.
+
+### Common Tools for Managing Replicas
+
+* Kubernetes (ReplicaSets, Deployments)
+* Docker Swarm
+* AWS ECS or EKS
+* NGINX Load Balancer
+* HAProxy
+* Cloud Load Balancers (AWS ALB, GCP Load Balancer)
+
+---
+
+## 2. Additional Fault Tolerance Techniques
+
+Replication alone is not enough. Distributed systems also use other resilience mechanisms.
+
+### Load Balancing
+
+Distributes incoming requests across replicas to prevent overloading any single instance.
+
+### Health Checks and Auto-Healing
+
+Automatically detect and restart unhealthy service instances.
+
+### Circuit Breaker Pattern
+
+Stops sending requests to a failing service temporarily to prevent cascading failures.
+
+### Retry and Timeout Strategies
+
+Retries failed requests after a short delay, with proper timeout limits to avoid long waits.
+
+### Data Replication
+
+Replicates data across multiple database nodes to maintain availability (e.g., MongoDB Replica Set, Redis Cluster).
+
+---
+
+## 3. Example Scenario
+
+Consider an e-commerce platform with a **payment-service** deployed as three replicas using Kubernetes.
+
+When traffic increases:
+
+* The load balancer distributes requests across all replicas.
+* If one replica fails due to memory or network issues:
+
+  * Kubernetes detects the failure.
+  * It automatically creates a new healthy replica.
+  * The load balancer stops sending requests to the failed instance.
+
+The platform continues to process payments without downtime.
+
+---
+
+## 4. Summary
+
+| Concept             | Description                                            |
+| ------------------- | ------------------------------------------------------ |
+| Replication         | Running multiple instances of the same service.        |
+| Goal                | Improve fault tolerance, scalability, and reliability. |
+| Managed By          | Load balancer and container orchestrators.             |
+| If a Service Fails  | Requests are redirected to healthy replicas.           |
+| Without Replication | System experiences downtime or degraded performance.   |
