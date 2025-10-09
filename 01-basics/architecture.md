@@ -120,15 +120,15 @@ Inside the “Video Service”:
 - **Internal design** = Implementation — how each part works  
 - Both are essential: architecture provides direction; internal design provides execution.
 
-## 🧩 Architecture Types
+## Architecture Types
 
 Let’s dive into **Monolithic** and **Distributed** architectures, which define how web systems are structured.
 
 ---
 
-## 🏗️ Monolithic Architecture
+## Monolithic Architecture
 
-### 🧠 Definition
+### Definition
 
 A **monolithic architecture** is a single, unified codebase where **frontend, backend, and database** are tightly coupled and deployed as **one application**.
 
