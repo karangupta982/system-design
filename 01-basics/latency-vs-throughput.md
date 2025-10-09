@@ -169,3 +169,142 @@ Each arrow introduces potential latency.
 * **Distributed systems** trade higher latency for better scalability and fault isolation.
 * Effective use of **caching, asynchronous design, and optimized networking** can significantly reduce overall latency.
 
+---
+
+# Difference Between CDN and Caching
+
+---
+
+## 1. Overview
+
+Both **CDN (Content Delivery Network)** and **Caching** aim to **reduce latency** and **improve performance** by serving data faster to the user.
+
+However, they operate at **different layers** and solve **different parts** of the performance problem.
+
+---
+
+## 2. What Is Caching?
+
+### Definition
+
+**Caching** is the process of **storing a copy of frequently accessed data** in a temporary storage (called a cache) so that future requests can be served faster without regenerating or refetching that data.
+
+### Key Idea
+
+> "Why recompute or refetch something that was recently fetched?"
+
+### Example
+
+* When your backend frequently queries a database for user info, you can cache it in **Redis** or **Memcached**.
+* Next time, the backend fetches from cache instead of the database — reducing latency.
+
+### Common Cache Types
+
+| Type                    | Location                   | Example                 |
+| ----------------------- | -------------------------- | ----------------------- |
+| **Browser Cache**       | User’s device              | Images, scripts, styles |
+| **Application Cache**   | Inside app memory          | In-memory object cache  |
+| **Database Cache**      | Between app and DB         | Redis, Memcached        |
+| **Reverse Proxy Cache** | Between client and backend | Nginx, Varnish          |
+
+### When to Use
+
+* Repeatedly accessed data (user profiles, product details)
+* Expensive queries or computations
+* Frequently read, rarely updated data
+
+---
+
+## 3. What Is a CDN (Content Delivery Network)?
+
+### Definition
+
+A **CDN** is a **geographically distributed network of servers** that cache and deliver **static assets** (like images, CSS, videos, scripts) closer to users based on their physical location.
+
+### Key Idea
+
+> "Bring data physically closer to the user."
+
+### Example
+
+If your main server is in **Mumbai**, but a user opens your website in **New York**, the CDN will serve your website’s static files from a **New York edge server**, instead of fetching them all the way from Mumbai.
+
+### What CDN Caches
+
+* Static files: images, videos, CSS, JS
+* Static API responses (if configured)
+* Occasionally, HTML pages (for static sites)
+
+### Popular CDN Providers
+
+* Cloudflare
+* Akamai
+* Amazon CloudFront
+* Fastly
+* Google Cloud CDN
+
+---
+
+## 4. CDN vs Caching: Key Differences
+
+| Feature          | **Caching**                                              | **CDN**                                                |
+| ---------------- | -------------------------------------------------------- | ------------------------------------------------------ |
+| **Purpose**      | Store data temporarily for faster access                 | Distribute static content globally for faster delivery |
+| **Scope**        | Can exist anywhere (app, DB, browser)                    | Distributed servers across regions (edge servers)      |
+| **Data Type**    | Dynamic or static (database queries, computations, etc.) | Mostly static (images, JS, CSS, videos)                |
+| **Location**     | Inside system (local memory, server)                     | Outside system (edge servers across world)             |
+| **Control**      | Managed by developer                                     | Managed by CDN provider                                |
+| **Example Tool** | Redis, Memcached, Nginx cache                            | Cloudflare, AWS CloudFront, Akamai                     |
+| **Use Case**     | Speed up backend and database queries                    | Speed up content delivery to end users                 |
+
+---
+
+## 5. How They Work Together
+
+In real-world systems, **CDNs and caching are used together**.
+
+Example:
+
+```
+User → Browser Cache → CDN Edge Server → Backend Cache → Database
+```
+
+Explanation:
+
+1. **Browser Cache** keeps recent assets locally.
+2. **CDN Edge Server** serves static files from nearby data centers.
+3. **Backend Cache (Redis)** stores dynamic data to avoid repeated DB hits.
+4. **Database** is the final source of truth.
+
+Each layer improves performance at its level.
+
+---
+
+## 6. Analogy
+
+Imagine a **bookstore chain**:
+
+* The **main warehouse** is your **database** (original source).
+* Each **regional store** keeps **popular books in stock** — that’s your **CDN** (serving nearby users quickly).
+* Each **cashier desk** keeps **the most sold book beside them** — that’s your **cache** (fastest local access).
+
+All aim to reduce waiting time — just at different levels.
+
+---
+
+## 7. Summary
+
+| Concept      | CDN                                  | Caching                                           |
+| ------------ | ------------------------------------ | ------------------------------------------------- |
+| **Layer**    | Network layer (edge)                 | Application, database, or browser                 |
+| **Goal**     | Reduce latency by physical proximity | Reduce latency by reusing previously fetched data |
+| **Best For** | Static content                       | Dynamic or repetitive data                        |
+| **Example**  | Cloudflare, Akamai                   | Redis, Memcached, Nginx cache                     |
+
+---
+
+## 8. Key Takeaway
+
+* **Caching** improves performance **inside** your system.
+* **CDN** improves performance **across the internet** for global users.
+* In modern architectures, **both are combined** to achieve optimal speed and scalability.
