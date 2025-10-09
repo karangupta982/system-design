@@ -160,6 +160,8 @@ Everything runs together — if one part changes, you redeploy the entire applic
 | **Easy Deployment** | One codebase → one deploy |
 | **Good for MVPs** | Fast for early-stage projects |
 | **Tight Integration** | Components can easily communicate |
+| **Maintainance** | Entire code is in one repo |
+| **Api calls** | Less api call to connect with other services since entire code is in one repo only |
 
 ---
 
@@ -231,6 +233,8 @@ Each service can be **developed, deployed, and scaled independently**.
 | **Networking Overhead** | Services need APIs to communicate |
 | **Data Consistency Issues** | Harder to manage distributed data |
 | **Higher Infrastructure Cost** | Multiple servers/containers required |
+| **Complex maintainance** | Code would be in multiple repos |
+| **Api calls** | More api calls to connect with other services |
 
 ---
 
