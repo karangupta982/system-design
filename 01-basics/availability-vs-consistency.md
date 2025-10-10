@@ -363,7 +363,7 @@ The **CAP Theorem**, proposed by **Eric Brewer**, states that a distributed syst
 
 1. **Consistency (C)** – Every node sees the same data at the same time.
 2. **Availability (A)** – Every request gets a response, even if some nodes fail.
-3. **Partition Tolerance (P)** – The system continues to operate even if network communication between nodes is lost.
+3. **Partition Tolerance (P)** – The system continues to operate even if network communication between nodes is lost. If any distributed system, any system get down then replica should take over the load to make the system fault tolerance. It is must to have in any system to don't let the system down.
 
 A distributed system must **tolerate partitions**, so in practice, it must choose between **Consistency** and **Availability** when a partition occurs.
 
@@ -378,6 +378,9 @@ If one node updates data, all others must immediately reflect that change before
 
 **Example:**
 If you update your profile picture, every server (region) shows the new picture instantly.
+While making transaction data changes should be shown instantly. In trading systems stock price should be shown accurately without any delay.
+
+### 
 
 ### 2.2. Availability (A)
 
