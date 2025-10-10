@@ -185,3 +185,116 @@ Example:
 * **Lamport Logical Clocks** provide a way to order events logically without relying on real time.
 * For conflict detection and advanced ordering, **Vector Clocks** extend Lamport’s concept.
 * Understanding time ordering is essential for building **consistent, fault-tolerant distributed systems**.
+
+---
+
+# Vector Clocks
+
+---
+
+## 1. What Are Vector Clocks?
+
+A **Vector Clock** is an advanced version of a **Lamport Clock** used to track the **causal relationships** between events in a **distributed system**.
+
+Unlike Lamport clocks, which use a single counter per process, vector clocks maintain a **list (vector)** of counters — one for **each process** in the system.
+
+This allows systems to detect not only the *order* of events but also whether **two events are concurrent** (happened independently).
+
+---
+
+## 2. Structure
+
+If a system has `N` processes, each process maintains a vector of size `N`:
+
+```
+V[i] = [v1, v2, v3, ..., vN]
+```
+
+Where:
+
+* `vj` represents the clock value of process `Pj` as known by process `Pi`.
+
+---
+
+## 3. Rules for Updating Vector Clocks
+
+1. **Initialization:**
+   All entries start at 0.
+
+2. **Internal Event:**
+   Increment your own counter:
+
+   ```
+   V[i] = V[i] + 1
+   ```
+
+3. **Send Event:**
+   Increment your own counter, attach vector clock with the message.
+
+4. **Receive Event:**
+   On receiving a message with clock `V_msg`:
+
+   ```
+   V[i] = max(V[i], V_msg[i]) for all i
+   ```
+
+   Then increment your own counter by 1.
+
+---
+
+## 4. Example
+
+Assume two processes: `P1` and `P2`.
+
+| Step | Event               | P1 Vector | P2 Vector | Explanation                                                     |
+| ---- | ------------------- | --------- | --------- | --------------------------------------------------------------- |
+| 1    | P1 event            | [1,0]     | [0,0]     | P1 increments its clock                                         |
+| 2    | P1 sends message    | [2,0]     | [0,0]     | Message sent with [2,0]                                         |
+| 3    | P2 receives message | [2,0]     | [3,1]     | P2 takes max([0,0],[2,0]) → [2,0], increments own index → [2,1] |
+| 4    | P2 event            | [2,0]     | [2,2]     | P2 increments its clock                                         |
+
+Now, `P2`’s events **happen after** `P1`’s events since `[2,0] < [2,2]`.
+
+---
+
+## 5. Determining Event Relationships
+
+Given two vector clocks `V1` and `V2`:
+
+* `V1 < V2` → Event 1 happened before Event 2
+  (All entries in `V1` ≤ `V2`, and at least one entry <)
+* `V1 > V2` → Event 2 happened before Event 1
+* **Concurrent:** If neither `V1 < V2` nor `V1 > V2`
+  → Events happened independently.
+
+---
+
+## 6. Difference Between Lamport Clock and Vector Clock
+
+| Feature                 | Lamport Clock                             | Vector Clock                                               |
+| ----------------------- | ----------------------------------------- | ---------------------------------------------------------- |
+| **Structure**           | Single integer counter per process        | Vector of counters (one per process)                       |
+| **Captures Causality**  | Partial order only (A happened before B)  | Full causal relationship and concurrency                   |
+| **Detects Concurrency** | No                                        | Yes                                                        |
+| **Overhead**            | Low (1 integer)                           | Higher (N integers per process)                            |
+| **Ordering**            | Total ordering possible                   | Partial ordering (more accurate)                           |
+| **Use Cases**           | Simple event ordering, message sequencing | Conflict detection, version control, distributed databases |
+| **Example Systems**     | Basic message passing                     | Amazon DynamoDB, Riak, Cassandra                           |
+
+---
+
+## 7. Use Case Example: Amazon DynamoDB
+
+* Each data version is tagged with a **vector clock**.
+* When updates occur on different replicas, DynamoDB compares vector clocks:
+
+  * If one clock is greater → one version overwrites the other.
+  * If clocks are concurrent → both versions are kept and resolved later (conflict resolution).
+
+---
+
+## 8. Summary
+
+* **Lamport Clock:** Orders events logically but cannot detect concurrent events.
+* **Vector Clock:** Captures complete causal relationships and can detect concurrency.
+* **Trade-off:** Accuracy vs overhead — vector clocks are more powerful but consume more memory and processing.
