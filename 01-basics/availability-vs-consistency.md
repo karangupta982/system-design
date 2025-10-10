@@ -167,8 +167,15 @@ a more fault-tolerant system is naturally more available.
 
 ### Key Difference
 
-* **Redundancy = Backup Components** (No link present)
-* **Replication = Backup Data** (link is present between replica's, like in database server replication is done since the replica's should be synchronized)
+* **Redundancy = Backup Components** (It is the duplication of nodes or component so that when a node or component fails, the duplicate node is available to service customers )
+#### Redundancy: Active and passive redundancy
+1. **Active Redundancy**: Active redundancy is considered when each unit is operating/active and responding to the action. Multiple nodes are connected to a load balancer, and each unit receives and equal load from the load balancer.
+2. **Passive Redundancy**: Passive redundancy is considered when one node is active or operational and the other is not operating . During the breakdown of active node, the passive node maintains availability by becoming the active node.
+
+
+* **Replication = Backup Data** (link is present between replica's, like in database server replication is done since the replica's should be synchronized. Redundancy + synchronization is replication, all the time data should be same on all server. It is done in case of database)
+1. **Active Replication**: All servers would be in active state and all will be able to fulfill the read and write request
+2. **Passive Replication**: Here One Node is Master Node and all other nodes are slave nodes. Every read-write operation is done by master, master is active state and slaves are in inactive state. Master-slave replication can be either synchronous or asynchronous. The difference is simple the timing of propagation of changes. If the changes are made to the master and slave at the same time, it is synchronous . If the changes are queued up and written later, it is asynchronous.
 
 They often work **together**:
 
