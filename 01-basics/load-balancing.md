@@ -25,3 +25,17 @@ Without a load balancer:
 * Failures in one node may cause downtime.
 
 A load balancer ensures even distribution and seamless failover.
+
+---
+
+## 3. Roles of a Load Balancer
+
+| Role                                      | Description                                                                    |
+| ----------------------------------------- | ------------------------------------------------------------------------------ |
+| **Traffic Distribution**                  | Distributes requests evenly across multiple backend servers.                   |
+| **Fault Tolerance**                       | Detects server failures and redirects traffic to healthy nodes.                |
+| **High Availability**                     | Ensures continuous service by avoiding single points of failure.               |
+| **Scalability Management**                | Supports horizontal scaling — new servers can be added or removed dynamically. |
+| **Performance Optimization**              | Reduces latency by routing requests to the nearest or least-loaded server.     |
+| **Security Layer**                        | Can hide backend details and protect against attacks like DDoS.                |
+| **Session Persistence (Sticky Sessions)** | Routes repeated user requests to the same server when necessary.               |
