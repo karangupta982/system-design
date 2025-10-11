@@ -126,3 +126,202 @@ When new plan is added → delete cache key "plans" → reload all plans from DB
 * Use caching for **read-heavy** or **static** workloads.
 * Always plan **cache invalidation** logic carefully — stale cache can cause incorrect results.
 * Combine with **CDN** for global performance improvements.
+
+---
+
+# Cache Eviction Strategies
+
+---
+
+## 1. What Is Cache Eviction?
+
+Cache eviction is the process of **removing old or unused data** from the cache when it becomes full or when data is no longer needed.
+
+Since **RAM is limited**, caches cannot store everything. Therefore, a **cache eviction policy** decides **which data to remove** to make space for new data.
+
+---
+
+## 2. Why Eviction Is Needed
+
+| Reason             | Explanation                                                  |
+| ------------------ | ------------------------------------------------------------ |
+| **Limited Memory** | Caches store data in RAM; memory is always finite.           |
+| **Freshness**      | Old or unused data must be replaced by newer, relevant data. |
+| **Performance**    | Maintaining optimal cache size ensures quick lookups.        |
+| **Cost Control**   | Reduces the need for expensive hardware upgrades.            |
+
+---
+
+## 3. Common Cache Eviction Strategies
+
+---
+
+### a. **Least Recently Used (LRU)**
+
+**Concept:**
+Removes the **least recently accessed** item when the cache is full.
+
+**Logic:**
+If an item hasn’t been used for a long time, it’s likely less important.
+
+**Example:**
+If cache can hold 3 items:
+Access sequence → A, B, C, A, D
+When D is added, **B** is evicted because it’s the least recently used.
+
+**Used In:** Redis (default), Memcached, web browsers.
+
+**Advantages:**
+
+* Reflects real-world access patterns.
+* Efficient and widely implemented.
+
+**Disadvantages:**
+
+* Can be costly in very large caches (requires tracking order of access).
+
+---
+
+### b. **Most Recently Used (MRU)**
+
+**Concept:**
+Removes the **most recently accessed** item first.
+
+**Logic:**
+Assumes that recently used data may not be needed soon again.
+
+**Example:**
+Access sequence → A, B, C, A, D
+When D is added, **A** is evicted because it was most recently used.
+
+**Used In:**
+Workloads where once data is used, it won’t be needed soon again (e.g., sequential scans).
+
+**Advantages:**
+
+* Works well for certain one-time access workloads.
+
+**Disadvantages:**
+
+* Inefficient for typical caching patterns (most systems reaccess recent data).
+
+---
+
+### c. **Least Frequently Used (LFU)**
+
+**Concept:**
+Removes the item that has been **used the fewest times**.
+
+**Logic:**
+If an item is rarely accessed, it’s less important to keep.
+
+**Example:**
+Cache stores item usage counts:
+
+* A: 5 times
+* B: 2 times
+* C: 10 times
+  When cache is full, **B** is evicted.
+
+**Used In:** Redis (optional), CDN caches.
+
+**Advantages:**
+
+* Good for workloads with strong access frequency patterns.
+
+**Disadvantages:**
+
+* Requires tracking frequency counts, adding overhead.
+* May retain stale but frequently accessed data.
+
+---
+
+### d. **First In, First Out (FIFO)**
+
+**Concept:**
+Removes the **oldest added** item first.
+
+**Logic:**
+Items are evicted in the same order they entered the cache.
+
+**Example:**
+Cache sequence → A (1st), B (2nd), C (3rd)
+When D is added, **A** is evicted.
+
+**Advantages:**
+
+* Simple and easy to implement.
+
+**Disadvantages:**
+
+* Doesn’t consider access frequency or recency.
+* May evict important data still in use.
+
+---
+
+### e. **Last In, First Out (LIFO)**
+
+**Concept:**
+Removes the **most recently added** item first.
+
+**Logic:**
+Assumes that the latest item added might be least needed next.
+
+**Example:**
+Cache sequence → A, B, C
+When D is added, **C** (last added) is evicted.
+
+**Advantages:**
+
+* Simple and fast implementation.
+
+**Disadvantages:**
+
+* Rarely suitable for real-world caching needs.
+* May frequently evict useful data.
+
+---
+
+### f. **Random Replacement (RR)**
+
+**Concept:**
+Removes a **random item** when space is needed.
+
+**Logic:**
+No access or frequency tracking — purely random eviction.
+
+**Example:**
+Cache has [A, B, C]; when D arrives, one of A/B/C is evicted at random.
+
+**Advantages:**
+
+* Extremely simple and low overhead.
+* Can perform well in unpredictable access patterns.
+
+**Disadvantages:**
+
+* May remove valuable items arbitrarily.
+* Unreliable for stable performance.
+
+---
+
+## 4. Summary Comparison
+
+| Strategy | Basis of Eviction       | Tracks Frequency? | Tracks Recency? | Common Use Case             |
+| -------- | ----------------------- | ----------------- | --------------- | --------------------------- |
+| **LRU**  | Least recently accessed | No                | Yes             | Web caches, Redis           |
+| **MRU**  | Most recently accessed  | No                | Yes             | Sequential access workloads |
+| **LFU**  | Least frequently used   | Yes               | No              | API rate limiting, Redis    |
+| **FIFO** | Oldest added            | No                | No              | Simple cache systems        |
+| **LIFO** | Most recently added     | No                | No              | Rarely used                 |
+| **RR**   | Random item             | No                | No              | Low-overhead systems        |
+
+---
+
+## 5. Key Takeaways
+
+* Eviction is essential for **memory management** in caching systems.
+* **LRU** is the most commonly used strategy for general-purpose caching.
+* **LFU** is better when **frequency of access** matters more than recency.
+* **FIFO** and **RR** are simpler but less efficient for dynamic workloads.
+* Choice of policy depends on **access pattern**, **system size**, and **performance goals**.
