@@ -465,4 +465,126 @@ Each shard is an **independent database** that holds a subset of the data.
 | Partitioning | Logical Split  | Manageability                  | Vertical/Horizontal (Single Node) | Query Efficiency         | Still single-node  |
 | Sharding     | Physical Split | Scalability                    | Horizontal (Multi-Node)           | True Distributed Scaling | Complex management |
 
+---
 
+# Why RDBMS Databases Are Hard to Scale — Even With Sharding
+
+---
+
+## 1. The Core Problem
+
+Traditional **Relational Database Management Systems (RDBMS)** such as MySQL or PostgreSQL are **designed for consistency and strong relationships**, not for distributed scalability.
+
+They follow the **ACID** principles (Atomicity, Consistency, Isolation, Durability), which work great on a single server — but become complex and expensive when distributed across multiple servers.
+
+That’s why, even though we can use **sharding** in SQL databases, **scaling RDBMS horizontally** (across multiple servers) is **not straightforward**.
+
+---
+
+## 2. Vertical vs. Horizontal Scaling
+
+| Type                              | Meaning                                                | Ease   | Limitation                                                     |
+| --------------------------------- | ------------------------------------------------------ | ------ | -------------------------------------------------------------- |
+| **Vertical Scaling**              | Add more CPU, RAM, or SSD to a single database server. | Simple | Physical limits and high cost.                                 |
+| **Horizontal Scaling (Sharding)** | Split data across multiple servers.                    | Hard   | Requires redesigning schema, queries, joins, and transactions. |
+
+RDBMS scale well **vertically** (bigger single machine) but struggle with **horizontal scaling** because of how relational integrity works.
+
+---
+
+## 3. What Is Sharding?
+
+**Sharding** means breaking a large database into smaller, independent parts called **shards**, where each shard holds a subset of the total data.
+
+Example — user database:
+
+* **Shard 1:** Users with IDs 1–1,000,000
+* **Shard 2:** Users with IDs 1,000,001–2,000,000
+
+Each shard is an independent database instance.
+
+---
+
+## 4. Why Sharding SQL Databases Is Hard
+
+Sharding can be done in RDBMS, but it **breaks some of the built-in relational advantages**.
+Here’s why it’s not as simple as it sounds:
+
+### a. **Cross-Shard Joins Become Expensive**
+
+* RDBMS are designed to perform joins inside one database.
+* When data related to a single query is spread across multiple shards, you can’t do joins efficiently.
+* Application layer must manually handle joining and aggregating data.
+
+### b. **Cross-Shard Transactions Are Difficult**
+
+* ACID transactions assume a single database.
+* Coordinating transactions across multiple shards requires distributed transaction management (like 2PC – Two-Phase Commit), which is complex and slow.
+
+### c. **Rebalancing Shards Is Painful**
+
+* As data grows unevenly, some shards become larger (called “hot shards”).
+* Rebalancing data to even out load can cause downtime or data inconsistency if not carefully handled.
+
+### d. **Schema Changes Are Hard**
+
+* Schema migrations (ALTER TABLE, adding columns, etc.) must be executed on every shard.
+* Coordinating and ensuring consistency across all shards is challenging.
+
+### e. **Operational Complexity**
+
+* Backups, replication, and failover must now work per shard.
+* Monitoring and maintenance become significantly harder.
+
+---
+
+## 5. Why NoSQL Databases Handle It Better
+
+NoSQL databases (like MongoDB, Cassandra, DynamoDB) were **built from the start** with horizontal scalability in mind.
+
+| Feature      | RDBMS                      | NoSQL                       |
+| ------------ | -------------------------- | --------------------------- |
+| Schema       | Fixed                      | Flexible                    |
+| Joins        | Native support             | Usually not supported       |
+| Transactions | Strong ACID                | Often eventual consistency  |
+| Scaling      | Vertical (hard to shard)   | Horizontal (auto-sharding)  |
+| Use Case     | Financial, relational data | Massive distributed systems |
+
+In short:
+
+* RDBMS focus on **strong consistency and structure**.
+* NoSQL focuses on **scalability and availability**.
+
+---
+
+## 6. So, Why Do People Still Shard RDBMS?
+
+Because **sometimes it’s necessary** — when data grows beyond a single server’s limit.
+
+Companies like **Facebook** and **YouTube** use sharded MySQL setups.
+However, they also built **custom sharding logic**, **middleware**, and **data routing systems** to manage the complexity.
+
+So, while *possible*, it’s **not automatic or easy**.
+
+---
+
+## 7. Summary
+
+| Concept                | RDBMS Limitation                 |
+| ---------------------- | -------------------------------- |
+| **ACID Transactions**  | Hard to maintain across shards   |
+| **Joins**              | Inefficient across shards        |
+| **Schema Management**  | Complex across multiple nodes    |
+| **Data Balancing**     | Manual and error-prone           |
+| **Horizontal Scaling** | Possible, but complex and costly |
+
+**Therefore:**
+You *can* scale RDBMS with sharding, but it’s **complex, manual, and breaks some benefits of relational databases**.
+That’s why people say **RDBMS don’t scale easily** compared to NoSQL databases.
+
+---
+
+## 8. Key Takeaway
+
+> RDBMS were designed for **consistency and relationships**, not distribution.
+> Sharding makes them scalable, but at the cost of **simplicity, joins, transactions, and maintainability**.
