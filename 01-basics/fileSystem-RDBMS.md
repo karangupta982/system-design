@@ -44,3 +44,53 @@ Example:
 | **Scalability**          | Hard to scale or share across systems efficiently.                                      |
 
 In short, **file systems** work well for **simple storage** but not for **structured, relational, or concurrent access**.
+
+---
+
+
+## 2. RDBMS (Relational Database Management System)
+
+An **RDBMS** is a structured system for storing and managing data using **tables, relations, and SQL**.
+
+Examples: **MySQL, PostgreSQL, Oracle, SQL Server**
+
+---
+
+### 2.1 Core Features
+
+* **Structured Data** — stored in tables with rows and columns.
+* **Schema Enforcement** — defines structure, data types, and constraints.
+* **Relationships** — data linked using **foreign keys**.
+* **SQL Queries** — used to query, filter, and manipulate data.
+* **Transactions** — ensures **ACID** properties:
+
+  * **Atomicity** — all or nothing
+  * **Consistency** — valid state transitions
+  * **Isolation** — concurrent transactions don’t interfere
+  * **Durability** — once committed, data persists
+
+---
+
+### 2.2 Advantages of RDBMS
+
+| Advantage               | Explanation                                                 |
+| ----------------------- | ----------------------------------------------------------- |
+| **Data Integrity**      | Enforces constraints to keep data valid.                    |
+| **Consistency**         | Transactions ensure reliable state.                         |
+| **Easy Querying**       | SQL provides a powerful, standard query language.           |
+| **Relationships**       | Foreign keys link tables easily (e.g., students ↔ courses). |
+| **Security**            | User roles, privileges, and authentication built in.        |
+| **Concurrency Control** | Multiple users can safely read/write simultaneously.        |
+| **Backup and Recovery** | Built-in support for data recovery and replication.         |
+
+---
+
+### 2.3 Disadvantages of RDBMS
+
+| Disadvantage                   | Explanation                                            |
+| ------------------------------ | ------------------------------------------------------ |
+| **Scalability Limits**         | Hard to scale horizontally across multiple servers.    |
+| **Rigid Schema**               | Schema changes require migrations.                     |
+| **High Resource Overhead**     | Joins and transactions can be slow for large datasets. |
+| **Complex Setup**              | Requires configuration and tuning for performance.     |
+| **Poor for Unstructured Data** | Not suitable for JSON, multimedia, or logs.            |
