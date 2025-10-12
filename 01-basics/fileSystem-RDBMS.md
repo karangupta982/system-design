@@ -94,3 +94,88 @@ Examples: **MySQL, PostgreSQL, Oracle, SQL Server**
 | **High Resource Overhead**     | Joins and transactions can be slow for large datasets. |
 | **Complex Setup**              | Requires configuration and tuning for performance.     |
 | **Poor for Unstructured Data** | Not suitable for JSON, multimedia, or logs.            |
+
+---
+
+# RDBMS Limitations and NoSQL Overview
+
+---
+
+## 1. Why RDBMS Is Not Always Scalable
+
+### a. **Vertical Scaling Limitation**
+
+RDBMS databases like **MySQL** or **PostgreSQL** are built around a **single-server architecture** — the data, indexes, and transactions are all handled by one machine.
+
+To improve performance, you usually:
+
+* Increase CPU power,
+* Add more RAM,
+* Use faster storage (SSD).
+
+This is called **vertical scaling** (scaling up).
+However, it eventually **reaches a physical limit** — there’s only so much you can add to one server.
+
+When traffic or data grows beyond that limit:
+
+* The single server becomes a **bottleneck**.
+* Scaling out (horizontally, by adding more servers) is **very hard**, because:
+
+  * RDBMS needs to maintain strict **ACID consistency** across all nodes.
+  * Coordinating transactions between multiple servers introduces **latency** and **complexity**.
+
+So, RDBMS works best for **moderate-sized systems** but struggles at **internet scale**.
+
+---
+
+### b. **Complex Setup and Maintenance**
+
+RDBMS systems are **heavy** — they require configuration for:
+
+* **Indexing strategies** (to make queries fast)
+* **Normalization** (to avoid data duplication)
+* **Query optimization**
+* **Backup and recovery**
+* **Replication and clustering**
+
+Database administrators (DBAs) must constantly:
+
+* Tune queries for performance.
+* Monitor transaction logs and locks.
+* Manage schema migrations.
+
+This makes setup and ongoing maintenance **complex** and **time-consuming**, especially when scaling or deploying in distributed environments.
+
+In contrast, many NoSQL systems are designed for **plug-and-play horizontal scaling** with simpler configuration.
+
+---
+
+### c. **Poor Handling of Unstructured Data**
+
+RDBMS expects **structured data** that fits neatly into tables and columns.
+
+Example:
+
+| id | name  | age |
+| -- | ----- | --- |
+| 1  | Alice | 25  |
+| 2  | Bob   | 30  |
+
+But in modern systems, we often deal with:
+
+* JSON data (dynamic fields)
+* Images, videos, or documents
+* Logs and sensor data
+* Rapidly changing or inconsistent fields
+
+In such cases:
+
+* Every schema change (like adding a new field) requires **migrations**.
+* Binary data must be stored separately (like in file systems or object storage).
+* Querying flexible or nested data (e.g., user preferences or arrays) becomes complex.
+
+Hence, RDBMS struggles with **semi-structured or unstructured data**, making it less suitable for flexible, large-scale, real-time systems.
+
+---
+
+
