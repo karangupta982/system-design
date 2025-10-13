@@ -82,9 +82,6 @@ Browser → Nginx (Web Server) → Node.js (App Server) → Database
 
 ---
 
-Here’s a short and clear explanation for you — practical and to the point:
-
----
 
 ## 1. What is Nginx?
 
