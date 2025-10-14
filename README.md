@@ -28,3 +28,27 @@ system-design-from-scratch/
 ├── 07-visuals/              → Diagrams, mind maps, and infographics
 └── CONTRIBUTING.md          → Contribution guidelines
 ```
+
+---
+
+## Learning Approach
+
+1. Start with `00-roadmap/` for a guided learning sequence.
+2. Move to `01-basics/` and `02-components/` to build your fundamentals.
+3. Study `03-design-patterns/` to understand how large-scale systems are structured.
+4. Explore `04-high-level-designs/` for real-world architectures.
+5. Review `05-low-level-designs/` for implementation-level understanding.
+6. Use `06-cheatsheets/` and `07-visuals/` for revision and quick recall.
+
+---
+
+## Key Topics Covered
+
+* Scalability, Load Balancing, and Caching
+* Databases, Sharding, and Replication
+* CAP Theorem, Availability vs Consistency
+* API Gateways, Message Queues, CDNs, and Proxies
+* Microservices, CQRS, Pub/Sub, Event-Driven Design
+* High-Level System Design Case Studies
+* Low-Level Design and SOLID Principles
+* Interview Preparation and Cheatsheets
