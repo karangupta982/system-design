@@ -52,3 +52,23 @@ system-design-from-scratch/
 * High-Level System Design Case Studies
 * Low-Level Design and SOLID Principles
 * Interview Preparation and Cheatsheets
+
+---
+
+## Contributions
+
+Contributions are welcome.
+If you’d like to add, correct, or improve content:
+
+* Fork the repo
+* Create a new branch
+* Commit your changes
+* Open a Pull Request
+
+Refer to `CONTRIBUTING.md` for details.
+
+---
+
+## Goal
+
+To build a **complete, open, and concise System Design resource** that helps learners and engineers understand not just *what* to design, but *how* and *why* systems work at scale.
