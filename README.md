@@ -11,3 +11,20 @@ System Design is the foundation of building scalable, reliable, and efficient so
 This repository organizes key topics into sections — from the basics of scalability to real-world design examples like Netflix, Twitter, and chat-apps.
 
 Each topic is concise, complete, and designed to be beginner-friendly yet industry-relevant.
+
+---
+
+## Repository Structure
+
+```
+system-design-from-scratch/
+├── 00-roadmap/              → Learning path and key resources
+├── 01-basics/               → Foundational concepts (scalability, caching, CAP theorem, etc.)
+├── 02-components/           → Core system components (API gateway, CDN, proxies, etc.)
+├── 03-design-patterns/      → Architectural patterns (Microservices, CQRS, Event-driven, etc.)
+├── 04-high-level-designs/   → Real-world system designs (Twitter, Uber, YouTube, etc.)
+├── 05-low-level-designs/    → OOP design, SOLID principles, and LLD examples
+├── 06-cheatsheets/          → Quick references, FAQs, and interview prep
+├── 07-visuals/              → Diagrams, mind maps, and infographics
+└── CONTRIBUTING.md          → Contribution guidelines
+```
