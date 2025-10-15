@@ -30,3 +30,19 @@ These topics introduce key trade-offs, system properties, and architectural prin
 | **scalability.md**                   | Introduces horizontal and vertical scaling and how to design scalable systems.                                   |
 | **synchronous-asynchronous.md**      | Differentiates between synchronous and asynchronous communication.                                               |
 | **webserver-ssl-tls.md**             | Explains how SSL/TLS secures web servers and client communication.                                               |
+
+---
+
+## How to Study
+
+1. Start with scalability, latency, and throughput to understand performance fundamentals.
+2. Move to CAP theorem, replication, and sharding to learn distributed trade-offs.
+3. Study communication, proxies, and load balancing for network-level understanding.
+4. Explore caching, indexing, and polyglot persistence for data optimization.
+5. Finish with security and authentication topics.
+
+---
+
+## Next Step
+
+After completing this folder, proceed to `02-components/`, where you will learn and implement system components such as API Gateways, Message Queues, Content Delivery Networks, and Rate Limiting.
