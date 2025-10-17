@@ -17,3 +17,14 @@ From this stage, you will not only study the concepts but also **implement pract
 | **circuit-breaker.md**           | Discusses the Circuit Breaker pattern for fault isolation and preventing cascading failures. Practical: implement a simple circuit breaker in Node.js using middleware logic.                                                          |
 | **eventual-consistency.md**      | Explains how distributed systems achieve data consistency over time. Practical: simulate eventual consistency using asynchronous data replication.                                                                                     |
 | **CQRS.md**                      | Describes the Command Query Responsibility Segregation pattern that separates read and write operations for scalability. Practical: implement a CQRS-based service using separate read/write models.                                   |
+
+---
+
+## Learning Flow
+
+1. Start with **Microservices** to understand distributed application design.
+2. Move to **Event-Driven Architecture** and **Pub-Sub** to learn communication mechanisms.
+3. Study **Service Discovery** and **Circuit Breaker** to handle reliability and fault tolerance.
+4. Conclude with **Eventual Consistency** and **CQRS** for mastering data synchronization and scalability.
+
+---
