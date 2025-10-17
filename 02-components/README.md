@@ -17,3 +17,31 @@ From this stage onward, you will complement the theoretical understanding with *
 | **monitoring-and-logging.md** | Discusses how to observe, log, and monitor systems for reliability. Practical: integrate Winston, PM2, or ELK stack for logging and metrics.                                                                 |
 | **rate-limiting.md**          | Explains rate limiting techniques to prevent abuse and control API traffic. Practical: implement rate limiting in Express using middleware like `express-rate-limit`.                                        |
 | **reverse-proxy.md**          | Describes reverse proxies and their use in load balancing, SSL termination, and caching. Practical: configure Nginx as a reverse proxy for your backend services.                                            |
+
+---
+
+## Learning Flow
+
+1. **Start with API Gateway and Reverse Proxy** to understand how requests are managed and routed.
+2. Move to **Rate Limiting** and **Monitoring** to ensure stability and visibility.
+3. Then explore **Message Queues** for asynchronous communication.
+4. Study **CDNs** and **Consistency Models** to understand global system behavior and performance optimization.
+
+---
+
+## Practical Implementation Plan
+
+* Each `.md` file should include:
+
+  * Concept overview
+  * Use cases and examples
+  * Implementation guide (with code snippets or configurations)
+  * Observations or learnings from hands-on setup
+
+As you progress, document real outputs, issues faced, and solutions. This will make your repository valuable for both learning and showcasing practical system design understanding.
+
+---
+
+## Next Step
+
+After completing this section, proceed to `03-design-patterns/` where you will study architectural patterns like Microservices, Event-Driven Systems, and CQRS — and begin implementing them using the components built here.
