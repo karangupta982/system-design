@@ -20,3 +20,10 @@ Each subfolder represents a high-level design case study:
 * **url-shortener/** – Scalable service design handling URL shortening, redirection, and analytics tracking.
 * **whatsapp/** – End-to-end encrypted chat system design covering synchronization, message delivery, and scaling.
 * **youtube/** – Video-sharing platform design including upload processing, streaming, recommendation, and scalability.
+
+## Learning Focus
+
+* Understanding how large-scale distributed systems are structured.
+* Learning the flow of data and communication between components.
+* Exploring design decisions that improve scalability, reliability, and fault tolerance.
+* Building a foundation for translating theoretical designs into practical implementations.
