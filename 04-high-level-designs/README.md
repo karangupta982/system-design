@@ -27,3 +27,7 @@ Each subfolder represents a high-level design case study:
 * Learning the flow of data and communication between components.
 * Exploring design decisions that improve scalability, reliability, and fault tolerance.
 * Building a foundation for translating theoretical designs into practical implementations.
+
+## Next Step
+
+After exploring high-level designs, the next step will involve working on **Low-Level Designs (LLD)** and **implementation** of selected systems to understand their internal components in more depth.
