@@ -1,4 +1,4 @@
-// gateway/utils/auth.js
+
 const jwt = require('jsonwebtoken');
 const JWT_SECRET = process.env.JWT_SECRET;
 const TOKEN_TTL = '2h';
