@@ -49,3 +49,47 @@ This pattern is often used during **monolith-to-microservices migration**.
 
 > Real-world pattern: **Strangler Fig Pattern**
 > Gradually replacing parts of the monolith with microservices.
+
+---
+
+## 5. Key Advantages
+
+Gradual migration from monolith to microservices
+Improved scalability and fault isolation
+Centralized routing, monitoring, and security
+Backward compatibility with existing systems
+Easier scaling using Kubernetes or cloud autoscaling
+
+---
+
+## 6. Related Architectural Patterns
+
+| Pattern                        | Description                                           |
+| ------------------------------ | ----------------------------------------------------- |
+| **Strangler Fig Pattern**      | Gradual migration from monolith to microservices      |
+| **Backend-for-Frontend (BFF)** | Separate gateway for different clients (web, mobile)  |
+| **Circuit Breaker**            | Prevent cascading failures between services           |
+| **Bulkhead Pattern**           | Isolate system components to increase fault tolerance |
+| **API Composition Pattern**    | Gateway aggregates multiple microservice responses    |
+
+---
+
+## 7. Real-world Analogy
+
+* **Monolith:** One big kitchen handling everything
+* **Microservices:** Multiple small kitchens for specific dishes
+* **API Gateway:** The waiter that routes each order to the right kitchen
+* During high rush hours → all kitchens active (microservices scaled)
+* During slow hours → main kitchen handles most orders
+
+---
+
+## 8. Summary
+
+| Concept               | Description                                     |
+| --------------------- | ----------------------------------------------- |
+| **Architecture Type** | Hybrid (Monolith + Microservices)               |
+| **Gateway Role**      | Routing + Load Balancing + Security             |
+| **Scaling Behavior**  | Dynamic scaling of microservices                |
+| **Use Case**          | Progressive migration & high-load handling      |
+| **Goal**              | Maintain reliability while enabling scalability |
