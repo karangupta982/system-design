@@ -536,20 +536,6 @@ Adjust autoscaling rules as needed based on metrics and performance data.
 
 ---
 
-## **Author**
-
-**Karan Gupta**  
-B.Tech CSE | MERN Stack Developer | Exploring System Design & Distributed Systems  
-[GitHub](https://github.com/karangupta982) • [LinkedIn](https://linkedin.com/in/karangupta982)
-
----
-
-## **License**
-
-This project is open source and available under the [MIT License](LICENSE).
-
----
-
 ## **Acknowledgments**
 
 * Inspired by industry-standard URL shortening services like Bitly and TinyURL
