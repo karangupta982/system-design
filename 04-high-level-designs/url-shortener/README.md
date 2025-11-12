@@ -1,11 +1,11 @@
 # **Scalable URL Shortener Service**
 
-A production-grade **URL Shortening Service** designed with **microservice architecture**, **observability**, and **auto-scaling** in mind — capable of handling millions of users efficiently.
+A production-grade **URL Shortening Service** designed with **microservice architecture** and **auto-scaling** in mind — capable of handling millions of users efficiently.
 
 This project demonstrates a complete end-to-end scalable backend system, covering:
 
 * Distributed ID generation using **Snowflake algorithm + ZooKeeper**
-* **Caching**, **load balancing**, and **observability**
+* **Caching**, **load balancing**.
 * **Microservices** communication via REST APIs
 * **Auto-scaling deployment** on **Kubernetes**
 
@@ -22,7 +22,7 @@ Each service is independent, owns its own data, and communicates through APIs.
 2. **URL Shortening Service** – Generates short URLs using distributed IDs.
 3. **Redirect Service** – Handles fast redirection to original URLs.
 4. **API Gateway** – Routes external requests to appropriate microservices.
-5. **Observability & Monitoring Layer** – Provides health metrics, logs, and dashboards.
+<!-- 5. **Observability & Monitoring Layer** – Provides health metrics, logs, and dashboards. -->
 
 ---
 
@@ -39,9 +39,9 @@ Each service is independent, owns its own data, and communicates through APIs.
 | **API Gateway**               | **NGINX / Express Gateway**         | Routes requests from users to respective microservices and balances load among instances.                                 |
 | **Containerization**          | **Docker**                          | Packages each service into lightweight containers for easy deployment and isolation.                                      |
 | **Orchestration**             | **Kubernetes (K8s)**                | Enables auto-scaling, load balancing, self-healing, and rolling deployments across all microservices.                     |
-| **Observability**             | **Prometheus + Grafana + Loki**     | Collects metrics, visualizes performance, and tracks logs for real-time observability.                                    |
-| **Logging & Tracing**         | **OpenTelemetry / Jaeger**          | Distributed tracing between microservices to debug latency and failures.                                                  |
-| **Message Broker (optional)** | **Kafka / RabbitMQ**                | For async operations like analytics tracking, link expiry notifications, or batch processing.                             |
+<!-- | **Observability**             | **Prometheus + Grafana + Loki**     | Collects metrics, visualizes performance, and tracks logs for real-time observability.                                    | -->
+<!-- | **Logging & Tracing**         | **OpenTelemetry / Jaeger**          | Distributed tracing between microservices to debug latency and failures.                                                  | -->
+<!-- | **Message Broker (optional)** | **Kafka / RabbitMQ**                | For async operations like analytics tracking, link expiry notifications, or batch processing.                             | -->
 
 ---
 
@@ -111,12 +111,12 @@ Each service is independent, owns its own data, and communicates through APIs.
   * Handle rate limiting, authentication, and caching at the edge.
 * Balances requests among multiple service instances.
 
----
+<!-- --- -->
 
-### 5. **Observability Stack**
+<!-- ### 5. **Observability Stack**
 
 * **Prometheus** scrapes metrics from all services.
-* **Grafana** visualizes dashboards (response time, throughput, cache hit ratio).
+* **Grafana** visualizes dashboards (response time, throughput, cache hit ratio). -->
 <!-- * **Loki + OpenTelemetry + Jaeger** collect logs and traces across services.
 * Health endpoints like `/healthz` or `/metrics` exposed by each service. -->
 
