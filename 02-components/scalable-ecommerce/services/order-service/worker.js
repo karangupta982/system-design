@@ -1,1 +1,0 @@
-// RabbitMQ consumer for processing order messages
