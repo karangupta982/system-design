@@ -15,14 +15,14 @@ It is a **set of constraints and principles** that define **how distributed syst
 * Layered system
 
 #### Resource based URLs
-* Correct REST style (resource-based)
+### Correct REST style (resource-based)
 GET /users          → get all users
 GET /users/101      → get user with id 101
 POST /users         → create a new user
 PUT /users/101      → update user 101
 DELETE /users/101   → delete user 101
 
-* Wrong (action-based URLs – not RESTful)
+### Wrong (action-based URLs – not RESTful)
 /getUsers
 /createUser
 /updateUser
