@@ -65,7 +65,7 @@ This decouples the sender and receiver — they don’t need to be active or ava
 This ensures reliable, asynchronous, and scalable communication between services.
 
 ## Advantages
-- Decouples services, reducing dependency.
+- Decouples services, reducing dependency means one service does not need to know details about another service (like its URL, internal logic, or whether it is currently running) in order to communicate.
 - Enables asynchronous processing.
 - Improves fault tolerance — if one service fails, messages are preserved.
 - Increases scalability by balancing load among multiple consumers.
